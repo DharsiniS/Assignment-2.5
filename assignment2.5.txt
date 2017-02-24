@@ -1,0 +1,59 @@
+1. Explain what is a cluster and what is a hadoop cluster
+	Cluster
+		It is a group of servers and other resources that act like a single system and enable high availability and in some cases, load balancing and parallel processing.
+		
+	 Hadoop cluster
+
+		Hadoop cluster is a special type of computational cluster designed for storing and analyzing tremendous amount of unstructured data in a distributed computing environment.
+		These clusters run on low cost commodity computers. 
+		This has three components client,master,slave.
+		This comprises of three different types of nodes name, master nodes, worker nodes and client nodes.
+		These are known for boosting the speed of data analysis applications.They are highly scalable.
+		These are highly resistant to failure because each piece of data is copied onto other cluster nodes which ensures data is not lost if one node fails.
+		These are also known as "shared nothing"  systems because the only thinbg thats shared between them is network that connects them.
+
+2. Explain the components of Hadoop 1.x
+
+	Components of Hadoop 1.x:
+		* HDFS
+		       * Name node
+		       * Data node
+		       * Secondary Name node
+		*MapReduce
+		       * Job tracker
+		       * Task tracker
+	HDFS:
+		 This has 3 major components
+			Name Node:
+				This is placed in the Master Node. Its used to store Meta Data about Data nodes.
+				This manages information like location of file blocks across cluster and its permission.
+				Once this process is started, the meta dats are updated for newly added or removed files.
+				This process is the heart of HDFS.
+				This  is a single point of failure.
+				Two types of name nodes are active and standby.
+			Data Node:
+				This is placed in the Slave Nodes.This is used to store application data.
+				Data are stored in blocks of data of size 64MB each.
+				Based on the replication factor, a single block gets replicated in multiple slavenodes.
+				whenever required this process handles the access to data blocks.
+				This process sends heart bits to the name node inorder to keep it aware about the running slave process.
+			Secondary Name Node:
+				Only single instance of this process runs on a cluster.
+				This is not a true backup Namenode and cannot serve primary Namenode's operations.
+				It runs on different machine than the primary NameNode since the memory requirements are the same for both.
+				It stores a copy of FsImage file and edits log
+				Periodically refreshes the edits log.
+	MapReduce:
+		This has 2 major components
+			Job tracker:
+				This is a service that farms out all MapReduce task to different nodes in the cluster.
+				This  is the service that is responsible for taking client requests.
+				This  can accept map reduce jobs from the clients and run it in a distributed manner using all the cluster nodes available.
+				
+			Task tracker:
+				This runs on DataNode. Mostly on all DataNodes.
+				It is replaced by the Node Manager in MRv2.
+				Mapper and Reducer tasks are executed on DataNodes and are administered by TaskTrackers.
+				This will be in constant communication with the JobTracker signalling the progress of the task which is being executed
+				The failure of this task tracker is not considered fatal. When this becomes unresponsive, the JobTracker will assign the task executed by this to another node.
+				
